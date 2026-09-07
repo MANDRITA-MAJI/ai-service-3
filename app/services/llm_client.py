@@ -1,14 +1,14 @@
 import os
 import json
+from dotenv import load_dotenv
 from groq import Groq
+
+load_dotenv()
 
 _client = None
 
-# Free-tier friendly: fast, and rate limits (30 RPM on the free tier as of
-# writing) are generous enough for a live demo. Swap to
-# "llama-3.3-70b-versatile" in this one place if you want higher-quality
-# answers and can live with tighter limits — nothing else needs to change.
-GROQ_MODEL = "llama-3.1-8b-instant"
+# Use a text-generation model available to the configured Groq account.
+GROQ_MODEL = "openai/gpt-oss-20b"
 
 
 def get_client() -> Groq:

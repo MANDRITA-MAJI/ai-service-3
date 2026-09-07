@@ -34,16 +34,17 @@ def match_universities(vector: list, category: str, district: str, top_k: int = 
         candidates.append({
             "university_id": meta.get("university_id"),
             "department": meta.get("department"),
+            "specialization": meta.get("specialization", ""),
             "score": round(score, 3),
         })
 
     candidates.sort(key=lambda c: c["score"], reverse=True)
     shortlist = candidates[:top_k]
 
+    # rank is the order the backend should try them in. Status starts as
+    # "pending" for all five; the backend updates it as it works through the list.
     for rank, c in enumerate(shortlist, start=1):
         c["rank"] = rank
-        c["status"] = "not_offered"
-    if shortlist:
-        shortlist[0]["status"] = "offered"  # only rank 1 gets notified first
+        c["status"] = "pending"
 
     return {"shortlist": shortlist}

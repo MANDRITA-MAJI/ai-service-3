@@ -10,8 +10,6 @@ def find_duplicates(vector: list, category: str, district: str, top_k: int = 5) 
         return []
 
     results = collection.query(
-       
-        results = collection.query(
         query_embeddings=[vector],
         n_results=top_k,
         where={
@@ -20,7 +18,6 @@ def find_duplicates(vector: list, category: str, district: str, top_k: int = 5) 
                 {"district": {"$eq": district}},
             ]
         },
-    )
     )
 
     matches = []

@@ -32,6 +32,7 @@ def seed():
                     "department": dept["name"],
                     "district": uni["location"]["district"],
                     "category": dept.get("primary_category", ""),
+                    "specialization": dept_text,
                     "current_active_projects": dept.get("active_projects", 0),
                     "max_concurrent_projects": uni.get("max_concurrent_projects", 15),
                 }],

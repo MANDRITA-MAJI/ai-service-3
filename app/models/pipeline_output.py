@@ -40,9 +40,10 @@ class PriorityOutput(BaseModel):
 class UniversityMatch(BaseModel):
     university_id: str
     department: str
+    specialization: str
     score: float
-    rank: int
-    status: str
+    rank: int  # 1..5 - the order the backend should try them in
+    status: str  # "pending" for all 5; backend flips this as it works through the sequence
 
 
 class RoutingOutput(BaseModel):
