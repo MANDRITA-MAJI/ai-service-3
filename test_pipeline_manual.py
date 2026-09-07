@@ -66,7 +66,7 @@ print()
 print("=== TEST 4: Routed (Hard engineering/research problem) ===")
 # The ORIGINAL severe engineering problem that gets routed to experts.
 sub3 = make_submission(
-    "SUB-TEST-C",
+    "SUB-TEST-Z",
     "Submersible pumps failing at 250ft due to heavy iron silt clogging",
     "Groundwater levels have dropped below 200ft this year. Standard borewell pumps are pulling up heavy iron-rich silt which destroys the impellers within weeks. Standard mesh filters clog in 48 hours, and cleaning them requires lifting the entire 250ft pipe assembly. We need a new type of self-cleaning filtration tool or centrifugal separator that can operate deep underground without relying on continuous electricity, as we face 12-hour power cuts.",
     village="Hesag"

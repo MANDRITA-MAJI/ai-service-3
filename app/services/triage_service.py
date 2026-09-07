@@ -76,11 +76,23 @@ Return JSON in exactly this shape:
 
     try:
         result = call_json(TRIAGE_SYSTEM_PROMPT, user_prompt)
+        
         if result.get("classification") not in ("advisory", "doubtful", "research"):
             raise ValueError("LLM returned an invalid classification")
-        result.setdefault("needs_confirmation", False)
+        
+        # --- NEW LOGIC: Override to doubtful if confidence is too low ---
+        confidence = float(result.get("confidence", 1.0))
+        if confidence < 0.9 and result.get("classification") != "doubtful":
+            result["classification"] = "doubtful"
+            result["reasoning"] = f"Original classification overridden. Confidence ({confidence}) is below the 0.9 threshold."
+            result["needs_confirmation"] = True
+        else:
+            result.setdefault("needs_confirmation", False)
+            
         return result
+        
     except Exception as e:
+        # fail safe: if the LLM call breaks...
         # fail safe: if the LLM call breaks, don't silently auto-approve
         # or auto-reject — default to "doubtful" so a human reviews it
         print(f"[triage_service] LLM call failed: {e}") 
