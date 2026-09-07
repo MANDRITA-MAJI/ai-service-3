@@ -1,0 +1,13 @@
+{
+  "healthcare": 3,
+  "water_resources": 3,
+  "sanitation": 2.5,
+  "education": 2,
+  "accessibility": 2,
+  "urban_infrastructure": 1.5,
+  "environment": 2,
+  "energy": 1.5,
+  "rural_livelihoods": 2,
+  "public_administration": 1,
+  "uncategorized": 1
+}

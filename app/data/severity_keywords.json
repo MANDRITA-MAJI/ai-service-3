@@ -1,0 +1,5 @@
+{
+  "high": ["no water", "unsafe", "collapsed", "disease", "outbreak", "children", "emergency", "contaminated"],
+  "medium": ["broken", "damaged", "delayed", "shortage"],
+  "low": ["improvement", "suggestion", "minor"]
+}

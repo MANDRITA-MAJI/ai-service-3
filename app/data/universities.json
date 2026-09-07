@@ -1,0 +1,157 @@
+[
+  {
+    "university_id": "UNIV-045",
+    "name": "Rajendra Institute of Medical Sciences (RIMS), Ranchi",
+    "location": { "district": "Ranchi", "lat": 23.3629, "lng": 85.3372 },
+    "max_concurrent_projects": 10,
+    "departments": [
+      {
+        "name": "Community Medicine",
+        "primary_category": "healthcare",
+        "expertise_areas": ["public health", "disease surveillance", "maternal and child health", "rural healthcare delivery"],
+        "faculty_count": 14,
+        "active_projects": 3
+      }
+    ]
+  },
+  {
+    "university_id": "UNIV-052",
+    "name": "BIT Sindri",
+    "location": { "district": "Dhanbad", "lat": 23.7644, "lng": 86.1511 },
+    "max_concurrent_projects": 12,
+    "departments": [
+      {
+        "name": "Mining Engineering",
+        "primary_category": "energy",
+        "expertise_areas": ["mine safety", "energy resource management", "land reclamation"],
+        "faculty_count": 12,
+        "active_projects": 2
+      },
+      {
+        "name": "Civil Engineering",
+        "primary_category": "urban_infrastructure",
+        "expertise_areas": ["urban planning", "road infrastructure", "public building design"],
+        "faculty_count": 18,
+        "active_projects": 6
+      }
+    ]
+  },
+  {
+    "university_id": "UNIV-061",
+    "name": "Ranchi University",
+    "location": { "district": "Ranchi", "lat": 23.3629, "lng": 85.3372 },
+    "max_concurrent_projects": 15,
+    "departments": [
+      {
+        "name": "Education",
+        "primary_category": "education",
+        "expertise_areas": ["pedagogy research", "rural school access", "curriculum design", "teacher training"],
+        "faculty_count": 20,
+        "active_projects": 5
+      },
+      {
+        "name": "Social Work",
+        "primary_category": "public_administration",
+        "expertise_areas": ["community development", "public policy implementation", "welfare scheme delivery"],
+        "faculty_count": 16,
+        "active_projects": 4
+      }
+    ]
+  },
+  {
+    "university_id": "UNIV-073",
+    "name": "Vinoba Bhave University, Hazaribagh",
+    "location": { "district": "Hazaribagh", "lat": 23.9925, "lng": 85.3637 },
+    "max_concurrent_projects": 10,
+    "departments": [
+      {
+        "name": "Rural Development",
+        "primary_category": "rural_livelihoods",
+        "expertise_areas": ["livelihood generation", "agricultural extension", "self-help groups", "microfinance"],
+        "faculty_count": 11,
+        "active_projects": 3
+      },
+      {
+        "name": "Special Education",
+        "primary_category": "accessibility",
+        "expertise_areas": ["disability access", "assistive technology", "inclusive infrastructure design"],
+        "faculty_count": 8,
+        "active_projects": 2
+      }
+    ]
+  },
+  {
+    "university_id": "UNIV-088",
+    "name": "Jharkhand University of Technology",
+    "location": { "district": "Ranchi", "lat": 23.4000, "lng": 85.4000 },
+    "max_concurrent_projects": 14,
+    "departments": [
+      {
+        "name": "Electrical Engineering",
+        "primary_category": "energy",
+        "expertise_areas": ["rural electrification", "solar microgrids", "power distribution"],
+        "faculty_count": 16,
+        "active_projects": 5
+      },
+      {
+        "name": "Environmental Science",
+        "primary_category": "sanitation",
+        "expertise_areas": ["waste management", "sanitation systems", "water treatment"],
+        "faculty_count": 10,
+        "active_projects": 3
+      }
+    ]
+  },
+  {
+    "university_id": "UNIV-014",
+    "name": "BIT Mesra",
+    "location": { "district": "Ranchi", "lat": 23.4143, "lng": 85.4419 },
+    "max_concurrent_projects": 15,
+    "departments": [
+      {
+        "name": "Civil Engineering",
+        "primary_category": "water_resources",
+        "expertise_areas": ["water resource management", "rural infrastructure", "sanitation systems", "structural engineering"],
+        "faculty_count": 22,
+        "active_projects": 5
+      },
+      {
+        "name": "Computer Science",
+        "primary_category": "education",
+        "expertise_areas": ["AI/ML", "IoT", "software systems", "data analytics"],
+        "faculty_count": 30,
+        "active_projects": 12
+      }
+    ]
+  },
+  {
+    "university_id": "UNIV-022",
+    "name": "NIT Jamshedpur",
+    "location": { "district": "East Singhbhum", "lat": 22.7925, "lng": 86.1842 },
+    "max_concurrent_projects": 12,
+    "departments": [
+      {
+        "name": "Environmental Engineering",
+        "primary_category": "environment",
+        "expertise_areas": ["water quality", "waste management", "environmental impact assessment"],
+        "faculty_count": 15,
+        "active_projects": 4
+      }
+    ]
+  },
+  {
+    "university_id": "UNIV-031",
+    "name": "Central University of Jharkhand",
+    "location": { "district": "Ranchi", "lat": 23.3629, "lng": 85.3372 },
+    "max_concurrent_projects": 10,
+    "departments": [
+      {
+        "name": "Rural Technology",
+        "primary_category": "rural_livelihoods",
+        "expertise_areas": ["appropriate technology", "rural infrastructure", "agricultural tools", "livelihood generation"],
+        "faculty_count": 10,
+        "active_projects": 3
+      }
+    ]
+  }
+]
