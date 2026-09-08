@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 from app.models.submission import SubmissionInput
+from app.services.translation_service import translate_to_english
 from app.models.pipeline_output import ProcessResponse
 from app.services import (
     speech_service,
@@ -16,17 +17,32 @@ router = APIRouter()
 
 @router.post("/process", response_model=ProcessResponse)
 def process_submission(submission: SubmissionInput):
-    # ---- Step 1: resolve text (transcribe if voice) ----
-    description = submission.content.description
+    # ---- Step 1: resolve text (transcribe if voice & translate if text) ----
+    title = submission.content.title or ""
+    description = submission.content.description or ""
+    language = submission.content.language or "en"
     transcription_result = None
 
     if submission.input_type == "voice" and submission.content.audio_url:
         local_path = speech_service.download_audio(submission.content.audio_url)
         transcription_result = speech_service.transcribe_audio(local_path)
+        # Whisper automatically translates to English (based on previous updates)
         description = transcription_result["text"]
+        
+    elif submission.input_type == "text" and language.lower() != "en":
+        # Translate typed text submissions to English before embedding
+        if title:
+            title = translate_to_english(title, source_lang=language)
+        if description:
+            description = translate_to_english(description, source_lang=language)
+            
+        # Overwrite the submission content so downstream services use English
+        submission.content.title = title
+        submission.content.description = description
 
+    # Build the embedding using the guaranteed-English text
     embedding_text = embedding_service.build_embedding_text(
-        submission.content.title, description
+        title, description
     )
     vector = embedding_service.embed_text(embedding_text)
 
@@ -53,10 +69,6 @@ def process_submission(submission: SubmissionInput):
         )
 
     # ---- Step 4: LLM triage — second check, only for novel cases ----
-    # NOTE: llm_triage can ALSO return "advisory" here — a novel problem
-    # that didn't match anything in the confirmed-vague set can still
-    # turn out to be advisory. Don't assume everything reaching this
-    # point is automatically research-worthy.
     triage_result = triage_service.llm_triage(embedding_text, category)
 
     if triage_result["classification"] == "advisory":
@@ -68,8 +80,6 @@ def process_submission(submission: SubmissionInput):
             transcription=transcription_result,
         )
 
-    # "doubtful" carries needs_confirmation=True downstream so the
-    # university dashboard knows to ask "confirm this needs research?"
     if triage_result["classification"] == "doubtful":
         triage_result["needs_confirmation"] = True
 
@@ -90,7 +100,7 @@ def process_submission(submission: SubmissionInput):
     priority = priority_service.compute_priority(
         description=description,
         category=category,
-        duplicate_count=1,  # starts at 1; batch clustering job updates this later
+        duplicate_count=1,  
         submitted_at=submission.submitted_at,
         has_media=len(submission.media) > 0,
     )
@@ -98,8 +108,6 @@ def process_submission(submission: SubmissionInput):
     # ---- Step 7: university routing ----
     routing = routing_service.match_universities(vector, category, submission.location.district)
 
-    # store this submission's embedding so FUTURE submissions can be
-    # checked against it during dedup
     dedup_service.store_embedding(
         submission.submission_id, vector, category, submission.location.district
     )

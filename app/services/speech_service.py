@@ -26,12 +26,14 @@ def confidence_tier(score: float) -> str:
     return "low"
 
 
-def transcribe_audio(audio_path: str) -> dict:
-    """audio_path must be a local file path. If your audio arrives as an
-    S3/storage URL, download it to a temp file before calling this —
-    see download_audio() below."""
+def transcribe_audio(audio_path: str, force_english: bool = True) -> dict:
+    """audio_path must be a local file path. Translates to English by default."""
     model = load_model()
-    segments, info = model.transcribe(audio_path)
+    
+    # NEW: Tell Whisper to translate to English instead of just transcribing
+    task = "translate" if force_english else "transcribe"
+    segments, info = model.transcribe(audio_path, task=task)
+    
     segment_list = list(segments)
 
     if not segment_list:
@@ -42,6 +44,7 @@ def transcribe_audio(audio_path: str) -> dict:
             "transcription_confidence": 0.0,
             "confidence_tier": "low",
             "silence_detected": True,
+            "translated_to_english": force_english # New tracking field
         }
 
     text = " ".join(s.text.strip() for s in segment_list).strip()
@@ -55,6 +58,7 @@ def transcribe_audio(audio_path: str) -> dict:
         "transcription_confidence": round(avg_conf, 3),
         "confidence_tier": confidence_tier(avg_conf),
         "silence_detected": silence,
+        "translated_to_english": force_english # New tracking field
     }
 
 
